@@ -18,7 +18,9 @@ with open(budget_csv) as csv_file:
 
     for row in csv_reader:
         print(row)
+        # counts number of months
         months = months + 1
+        # calculates overall profit/loss for entire period
         net_total = float(row['Profit/Losses']) + net_total
 
 # starting a write file to create dictionary
@@ -31,12 +33,6 @@ with open(budget_csv) as csv_file:
 #.        writer(mydict)
   #  next(csv_reader, None)
    # for row in csv_reader:
-
-# calculate net total amount of "Profits/Losses" for entire period
-    # sum everything in column B/2
-
-#.    net_total = sum(dummy['Profit/Losses'])
-print(net_total)
 
 # Pt1: calculate changes in "Profits/Losses" over the entire period
     # does this mean each month-to-month shift?
@@ -80,7 +76,7 @@ with open(output_path, 'a+') as text:
     
     #writes header
     #.text_out ("Financial Analysis")
-    #.text_out ("-------------------------")
+    #.text_out.write ("-------------------------")
     
     #writes output & pulls from variables to input values
     #.text_out.writerow("Total Months: " + months)
