@@ -7,31 +7,36 @@ import csv
 
 # need to read in PyBank/Resources/budget_data.csv
 budget_csv = os.path.join(os.getcwd(), "PyBank", "Resources", "budget_data.csv")
-
+# creating a filepath for a second file that sets as a dictionary 
+budget_working = os.path.join(os.getcwd(), "PyBank", "Resources", "budget_working.csv")
 
 with open(budget_csv) as csv_file:            
-    csv_reader = csv.reader(csv_file, delimiter = ',')
-    months = -1     #starting at -1 to account for header row
-    total_change = 0
+    csv_reader = csv.DictReader(csv_file, delimiter = ',')
+    dummy = csv.DictReader(csv_file, delimiter = ',')
+    months = 0 
+    net_total = 0    
 
     for row in csv_reader:
         print(row)
         months = months + 1
+        net_total = float(row['Profit/Losses']) + net_total
+
+# starting a write file to create dictionary
+#.    with open(budget_working, mode='w') as outfile:
+#.        writer = csv.writer(outfile)
+#.        mydict = {rows[0]:rows[1] for rows in csv_reader}
     
-        
         #.if row != 1:
         #.    total_change = total_change + int(row[1])
-          
+#.        writer(mydict)
   #  next(csv_reader, None)
    # for row in csv_reader:
 
-# turning data into a dictionary; from stackoverflow.com
-budget = {}
-
-
 # calculate net total amount of "Profits/Losses" for entire period
     # sum everything in column B/2
-#..net_total = sum(col.2)
+
+#.    net_total = sum(dummy['Profit/Losses'])
+print(net_total)
 
 # Pt1: calculate changes in "Profits/Losses" over the entire period
     # does this mean each month-to-month shift?
@@ -57,10 +62,10 @@ budget = {}
     # Greatest Decrease in Profits: Month-YEAR ($.....)
 
 # Analysis should print in terminal 
-#    print("Financial Analysis")
-#    print("-------------------------")
+print("Financial Analysis")
+print("-------------------------")
 print("Total Months: " + str(months))
-#    print("Total: $" + net_total)
+print("Total: $" + str(net_total))
 #    print("Average Change: $" + avg_change)
 #    print("Greatest Increase in Profits: " + high_time + " ($" + high_money + ")"
 #    print("Greatest Decrease in Profits: " + low_time + " ($" + low_money + ")"
