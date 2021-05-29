@@ -11,12 +11,15 @@ budget_csv = os.path.join(os.getcwd(), "PyBank", "Resources", "budget_data.csv")
 with open(budget_csv) as csv_file:            
     csv_reader = csv.reader(csv_file, delimiter = ',')
     
+    for row in csv_reader:
+        print(row)
+  
   #  next(csv_reader, None)
    # for row in csv_reader:
         
 # need to count the number of months in the dataset
     # should be something like count rows - 1 (to account for header)
-months = rows - 1
+months = row.index
 print (months)
 
 # calculate net total amount of "Profits/Losses" for entire period
@@ -56,21 +59,21 @@ print (months)
 #    print("Greatest Decrease in Profits: " + low_time + " ($" + low_money + ")"
 
 # Analysis should export to text (PyBank/Analysis/budget_result.txt)
-output_path = os.path.join(os.getcwd(), 'Analysis', 'budget_result.txt')
+#.output_path = os.path.join(os.getcwd(), 'Analysis', 'budget_result.txt')
 
-with open(output_path, 'w') as csvfile:
+#.with open(output_path, 'w') as text:
     # initializes the writerls
-    csvwriter = csv.writer(csvfile, delimiter=',')
+   #. text_out = text.writer(text, delimiter=',')
     
     #writes header
-    csvwriter.writerow("Financial Analysis")
-    csvwriter.writerow("-------------------------")
+  #.  text_out.writerow("Financial Analysis")
+  #.  text_out.writerow("-------------------------")
     
     #writes output & pulls from variables to input values
-    csvwriter.writenow("Total Months: " + months)
-    csvwriter.writenow("Total: $" + net_total)
-    csvwriter.writenow("Average Change: $" + avg_change)
-    csvwriter.writenow("Greatest Increase in Profits: " + high_time + " ($" + high_money + ")")
-    csvwriter.writenow("Greatest Decrease in Profits: " + low_time + " ($" + low_money + ")")
+  #.  text_out.writenow("Total Months: " + months)
+  #.  text_out.writenow("Total: $" + net_total)
+  #.  text_out.writenow("Average Change: $" + avg_change)
+  #.  text_out.writenow("Greatest Increase in Profits: " + high_time + " ($" + high_money + ")")
+  #.  text_out.writenow("Greatest Decrease in Profits: " + low_time + " ($" + low_money + ")")
                        
    
