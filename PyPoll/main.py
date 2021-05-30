@@ -14,37 +14,48 @@ polls_working = os.path.join(os.getcwd(), "PyPoll", "Resources", "election_worki
 
 with open(polling_csv) as csv_file:            
     csv_reader = csv.reader(csv_file, delimiter = ',')
-    dummy = csv.DictReader(csv_file, delimiter = ',')
+    dict_reader = csv.DictReader(csv_file, delimiter = ',')
 
-# vote count function
-def vote_count()
-
-# get vote count
+# initiatate vote counters
     total_votes = 0
-    # this is the one converted to dictionary
-    out_dummy = []
-    for row in dummy:
+    cand_1_counter = 0
+    cand_2_counter = 0
+    cand_3_counter = 0
+    cand_4_counter = 0
+    
+    # creates list of candidates & accumulates total votes
+    candidates = []
+    for row in dict_reader:
         print(row)
-        total_votes = total_votes + 1   # works correctly
-        if row['Candidate'] not in out_dummy:
-           out_dummy.append(row['Candidate'])
+        total_votes = total_votes + 1   
+        if row['Candidate'] not in candidates:
+           candidates.append(row['Candidate'])
+        
+        # accumulates totals for each candidate
+        if row['Candidate'] == candidates[0]:
+            cand_1 = candidates[0]
+            cand_1_counter = cand_1_counter + 1
+        elif row['Candidate'] == candidates[1]:
+            cand_2 = candidates[1]
+            cand_2_counter = cand_2_counter + 1
+        elif row['Candidate'] == candidates[2]:
+            cand_3 = candidates[2]
+            cand_3_counter = cand_3_counter + 1
+        elif row['Candidate'] == candidates[3]:
+            cand_4 = candidates[3]
+            cand_4_counter = cand_4_counter +1
+        else:
+            next
 
-    print(out_dummy)
+    print(candidates)
 
-# generate list of candidates
-    # this is standard csv
-#.    output_list = []
-  #.  for thisrow in csv_reader:
-    #.    print(thisrow)
-      #.  if [thisrow[2]] not in output_list:
-        #.    output_list.append[thisrow[2]]
-        #.    print("what's wrong with this syntax?")
-        #.    print(output_list)
+   
+    print(cand_1, cand_1_counter)
+    print(cand_2, cand_2_counter)
+    print(cand_3, cand_3_counter)
+    print(cand_4, cand_4_counter)
 
-
-# calculate total number of votes for each candidate
-    # use out_dummy from above (once it works), to set-up counters for each person
-    # iterate through data with conditionals that increase counters
+# create reordering of candidates by number of votes received for output
 
 # calculate percentage of votes for each candidate
     # use results from previous 
