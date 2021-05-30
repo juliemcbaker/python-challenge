@@ -16,6 +16,9 @@ with open(polling_csv) as csv_file:
     csv_reader = csv.reader(csv_file, delimiter = ',')
     dummy = csv.DictReader(csv_file, delimiter = ',')
 
+# vote count function
+def vote_count()
+
 # get vote count
     total_votes = 0
     # this is the one converted to dictionary
@@ -23,11 +26,9 @@ with open(polling_csv) as csv_file:
     for row in dummy:
         print(row)
         total_votes = total_votes + 1   # works correctly
-        if 'Candidate' not in [out_dummy]:
+        if row['Candidate'] not in out_dummy:
            out_dummy.append(row['Candidate'])
-           out_dummy.append("o")
-        else:
-            next
+
     print(out_dummy)
 
 # generate list of candidates
