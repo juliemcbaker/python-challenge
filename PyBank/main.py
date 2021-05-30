@@ -9,26 +9,22 @@ import operator
 # need to read in PyBank/Resources/budget_data.csv
 budget_csv = os.path.join(os.getcwd(), "PyBank", "Resources", "budget_data.csv")
 # creating a filepath for a second file that sets as a dictionary 
-budget_working = os.path.join(os.getcwd(), "PyBank", "Resources", "budget_working.csv")
+#.budget_working = os.path.join(os.getcwd(), "PyBank", "Resources", "budget_working.csv")
 
 with open(budget_csv) as csv_file:            
     csv_reader = csv.reader(csv_file, delimiter = ',')
-    dummy = csv.DictReader(csv_file, delimiter = ',')
+    dict_data = csv.DictReader(csv_file, delimiter = ',')
     months = 0 
     net_total = 0
 
     # this is the one converted to dictionary
-    for row in dummy:
-        print(row)
+    highest_value = 0
+    lowest_value = 0
+    for row in dict_data:
         # counts number of months
         months = months + 1
         # calculates overall profit/loss for entire period
         net_total = float(row['Profit/Losses']) + net_total
-
-    # Loop is executing, but it's always iterating to the last month
-    highest_value = 0
-    lowest_value = 0
-    for i in range (months):
         if float (row['Profit/Losses']) > highest_value:
             highest_value = float(row['Profit/Losses'])
             highest_month = (row['Date'])
@@ -41,18 +37,18 @@ with open(budget_csv) as csv_file:
     print(highest_value)
     print(highest_month)
     print(lowest_value)
-    #print(lowest_month)
+    print(lowest_month)
 
     # this is the standard csv; trying based on stackoverflow to change the header
-    with open(budget_working, mode='w') as outfile:
-        writer = csv.writer(outfile)
-        for row in csv_reader:
-            newHeader = csv.writer(outfile)
-            newFN = ['Date', 'Up_Down']
-            newHeader.writerow(newFN)
-            print(row)
+#.    with open(budget_working, mode='w') as outfile:
+  #.      writer = csv.writer(outfile)
+    #.    for row in csv_reader:
+      #.      newHeader = csv.writer(outfile)
+        #.    newFN = ['Date', 'Up_Down']
+          #.  newHeader.writerow(newFN)
+         #.   print(row)
 
-print(outfile)
+#. print(outfile)
 
 # starting a write file to create dictionary
 #.    with open(budget_working, mode='w') as outfile:
@@ -75,7 +71,7 @@ print(outfile)
 
 # Greatest increase in profits (date & amount) from entire period
 # based on code found on stackoverflow.com
-max_value = max(dummy('Profit/Losses'))
+#max_value = max(dummy('Profit/Losses'))
 # max_keys = [dict.items('Date') if dict.values(Profit/Losses) == max_value]
 #, key=Date.get)
 #print(max_value)
@@ -99,10 +95,8 @@ max_value = max(dummy('Profit/Losses'))
 print("Total Months: " + str(months)) 
 print("Total: $" + str(net_total))
 #    print("Average Change: $" + avg_change)
-print(highest_value)
-print(max_value)
-#print("Greatest Increase in Profits: " + str(highest_month) + " ($" + highest_value + ")")
-#    print("Greatest Decrease in Profits: " + low_time + " ($" + low_money + ")"
+print("Greatest Increase in Profits: " + str(highest_month) + " ($" + str(highest_value) + ")")
+print("Greatest Decrease in Profits: " + str(lowest_month) + " ($" + str(lowest_value) + ")")
 
 # Analysis should export to text (PyBank/Analysis/budget_result.txt)
 #.output_path = os.path.join(os.getcwd(), 'PyBank', 'Analysis', 'budget_result.txt')
