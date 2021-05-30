@@ -17,8 +17,8 @@ with open(budget_csv) as csv_file:
     months = 0 
     net_total = 0
 
-
-    for row in csv_reader:
+    # this is the one converted to dictionary
+    for row in dummy:
         print(row)
         # counts number of months
         months = months + 1
@@ -31,7 +31,7 @@ with open(budget_csv) as csv_file:
     for i in range (months):
         if float (row['Profit/Losses']) > highest_value:
             highest_value = float(row['Profit/Losses'])
-            highest_month = (['Date'])
+            highest_month = (row['Date'])
         elif float(row['Profit/Losses']) < lowest_value:
             lowest_value = float(row['Profit/Losses'])
             lowest_month = (row['Date'])
@@ -43,10 +43,16 @@ with open(budget_csv) as csv_file:
     print(lowest_value)
     #print(lowest_month)
 
-    for row in dummy:
-        newHeader = csv.writer(outfile)
+    # this is the standard csv; trying based on stackoverflow to change the header
+    with open(budget_working, mode='w') as outfile:
+        writer = csv.writer(outfile)
+        for row in csv_reader:
+            newHeader = csv.writer(outfile)
+            newFN = ['Date', 'Up_Down']
+            newHeader.writerow(newFN)
+            print(row)
 
-
+print(outfile)
 
 # starting a write file to create dictionary
 #.    with open(budget_working, mode='w') as outfile:
@@ -69,7 +75,7 @@ with open(budget_csv) as csv_file:
 
 # Greatest increase in profits (date & amount) from entire period
 # based on code found on stackoverflow.com
-#max_value = max(dummy(int('Profit/Losses')))
+max_value = max(dummy('Profit/Losses'))
 # max_keys = [dict.items('Date') if dict.values(Profit/Losses) == max_value]
 #, key=Date.get)
 #print(max_value)
@@ -94,6 +100,7 @@ print("Total Months: " + str(months))
 print("Total: $" + str(net_total))
 #    print("Average Change: $" + avg_change)
 print(highest_value)
+print(max_value)
 #print("Greatest Increase in Profits: " + str(highest_month) + " ($" + highest_value + ")")
 #    print("Greatest Decrease in Profits: " + low_time + " ($" + low_money + ")"
 

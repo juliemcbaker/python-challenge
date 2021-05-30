@@ -8,26 +8,27 @@ import csv
 # read in csv & convert to a dictionary
 # need to read in PyPoll/Resources/election_data.csv
 # created smaller file PyPoll/Resources/election_test.csv for testing
-polling_csv = os.path.join(os.getcwd(), "Resources", "election_test.csv")
+polling_csv = os.path.join(os.getcwd(), "PyPoll", "Resources", "election_test.csv")
 # creating a filepath for a second file that sets as a dictionary 
-polls_working = os.path.join(os.getcwd(), "Resources", "election_working.csv")
+polls_working = os.path.join(os.getcwd(), "PyPoll", "Resources", "election_working.csv")
 
 with open(polling_csv) as csv_file:            
     csv_reader = csv.reader(csv_file, delimiter = ',')
     dummy = csv.DictReader(csv_file, delimiter = ',')
 
-
 # get vote count
+    total_votes = 0
     # this is the one converted to dictionary
     out_dummy = []
     for row in dummy:
         print(row)
+        total_votes = total_votes + 1   # works correctly
         if 'Candidate' not in [out_dummy]:
            out_dummy.append(row['Candidate'])
-           out_dummy.append("BLUE")
+           out_dummy.append("o")
         else:
             next
-    print(out_dummy)      
+    print(out_dummy)
 
 # generate list of candidates
     # this is standard csv
@@ -41,20 +42,25 @@ with open(polling_csv) as csv_file:
 
 
 # calculate total number of votes for each candidate
+    # use out_dummy from above (once it works), to set-up counters for each person
+    # iterate through data with conditionals that increase counters
 
 # calculate percentage of votes for each candidate
+    # use results from previous 
 
 # popular vote winner
+    # winner = max[counters] ## conceptul
+
 
 # ================================================================
-# print("Election Results")
-# print("----------------------------")
-# print("Total Votes: " + total_votes)
-# print("----------------------------")
+print("Election Results")
+print("----------------------------")
+print("Total Votes: " + str(total_votes))
+print("----------------------------")
 # print {name1}: percent_name1  (total_name1)
 # etc for each name
 # print("----------------------------")
-# print("Winner: " + winner)
+# print("Winner: " + str(winner))
 # print("----------------------------")
 
 # ALSO PRINT TO TEXT FILE
