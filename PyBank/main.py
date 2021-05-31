@@ -37,12 +37,12 @@ with open(budget_csv) as csv_file:
             # calculates overall profit/loss for entire period
         net_total = int(row['Profit/Losses']) + net_total
 
-        if row == 1:
-            start_value = int(row['Profit/Losses'])
-        else:
-            start_value = start_value    
+        #.if row == 1:
+        #.    start_value = int(row['Profit/Losses'])
+        #. else:
+        #    start_value = start_value    
         
-            # identifies highest & lowest values & corresponding months
+        # identifies highest & lowest values & corresponding months
         if int(row['Profit/Losses']) > highest_value:
             highest_value = int(row['Profit/Losses'])
             highest_month = (row['Date'])
@@ -52,14 +52,14 @@ with open(budget_csv) as csv_file:
         else:
             next
         
-        if int(row['Profit/Losses']) != start_value:
-            this_row = (row)
-            last_row = (row-1)
-            this_month = (this_row['Profit/Losses'])
-            last_month = (last_row['Profit/Losses'])
-            this_change = this_month - last_month
-            change_list.append(this_change)
-        print(change_list)
+      #.  if int(row['Profit/Losses']) != start_value:
+      #.      this_row = (row)
+      #.      last_row = (row-1)
+      #.      this_month = (this_row['Profit/Losses'])
+      #.      last_month = (last_row['Profit/Losses'])
+      #.      this_change = this_month - last_month
+      #.      change_list.append(this_change)
+      #.  print(change_list)
 
 # starting a write file to create dictionary
 #.    with open(budget_working, mode='w') as outfile:
@@ -82,7 +82,7 @@ with open(budget_csv) as csv_file:
 
 
 # Analysis should print in terminal 
-print(f'Financial Analysis')
+print('Financial Analysis')
 print("-------------------------")
 print("Total Months: " + str(months)) 
 print("Total: $" + str(net_total))
@@ -91,20 +91,23 @@ print("Greatest Increase in Profits: " + str(highest_month) + " ($" + str(highes
 print("Greatest Decrease in Profits: " + str(lowest_month) + " ($" + str(lowest_value) + ")")
 
 # Analysis should export to text (PyBank/Analysis/budget_result.txt)
-#.output_path = os.path.join(os.getcwd(), 'PyBank', 'Analysis', 'budget_result.txt')
+output_path = os.path.join(os.getcwd(), 'PyBank', 'Analysis', 'budget_result.txt')
 
-# found tip about append & read at geeksforgeeks.org
-#.with open(output_path, 'a+') as text:
-    # initializes the writerls
- #.   text_out = text.write(output_path)
-    
-    #writes header
-    #.text_out ("Financial Analysis")
-    #.text_out.write ("-------------------------")
-    
-    #writes output & pulls from variables to input values
-    #.text_out.writerow("Total Months: " + months)
-  #.  text_out.writerow("Total: $" + net_total)
-  #.  text_out.writerow("Average Change: $" + avg_change)
-  #.  text_out.writerow("Greatest Increase in Profits: " + high_time + " ($" + high_money + ")")
-  #.  text_out.writerow("Greatest Decrease in Profits: " + low_time + " ($" + low_money + ")")
+# opens file 
+a = open(output_path, 'w+')
+# writes header
+a.write("Financial Analysis")
+a.write('\n')
+a.write("------------------------")
+a.write('\n')       
+#writes output & pulls from variables to input values
+a.write(f"Total Months: {months}")
+a.write('\n')       
+a.write(f"Total: ${net_total}")
+a.write('\n')       
+#.a.write(f"Average Change: $ + {avg_change}")
+a.write('\n')       
+a.write(f"Greatest Increase in Profits: {highest_month} (${highest_value})")
+a.write('\n')       
+a.write(f"Greatest Decrease in Profits: {lowest_month} (${lowest_value})")
+a.close()
