@@ -12,3 +12,5 @@ To expedite testing, a smaller data file (election_test.csv) was used during dev
 Once data is extracted to program: (1) counts total votes, (2) creates a list of candidates, (3) counts votes per candidate, 
 (4) determines the winner, (5) determines 2nd, 3rd, and 4th places, and (6) calculates percentage of votes each candidate received.
 The program then outputs a report of the results both through terminal and as election_results.txt file.
+
+* The Jupyter Notebook associated with PyBank is very outdated and should be disregarded.
