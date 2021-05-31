@@ -8,8 +8,9 @@ import csv
 # read in csv & convert to a dictionary
 # need to read in PyPoll/Resources/election_data.csv
 # created smaller file PyPoll/Resources/election_test.csv for testing
-polling_csv = os.path.join(os.getcwd(), "PyPoll", "Resources", "election_test.csv")
-# creating a filepath for a second file that sets as a dictionary 
+polling_csv = os.path.join(os.getcwd(), "PyPoll", "Resources", "election_data.csv")
+## MAKE SURE THIS IS UPDATED TO BE THE FINAL FILE
+# # creating a filepath for a second file that sets as a dictionary 
 polls_working = os.path.join(os.getcwd(), "PyPoll", "Resources", "election_working.csv")
 
 with open(polling_csv) as csv_file:            
@@ -47,17 +48,8 @@ with open(polling_csv) as csv_file:
         else:
             next
 
-    print(candidates)
-
-   
-    print(cand_1, cand_1_counter)
-    print(cand_2, cand_2_counter)
-    print(cand_3, cand_3_counter)
-    print(cand_4, cand_4_counter)
-
-# create reordering of candidates by number of votes received for output
-
-# Loop to determine winner
+# Reordering of candidates by votes received for output
+# This loop determines WINNER
 if cand_1_counter > cand_2_counter:
     hold1_cand = cand_2
     hold1_count = cand_2_counter
@@ -93,13 +85,7 @@ elif cand_2_counter > cand_3_counter:
         hold3_cand = cand_4
         hold3_count = cand_4_counter
         
-
-print(winner, winner_count)
-print(hold1_cand, hold1_count)
-print(hold2_cand, hold2_count)
-print(hold3_cand, hold3_count)
-
-# loop to determine remaining finishing ranks
+# This loop to determines 2nd, 3rd, & 4th places
 if second_count > 0:
     if hold1_count > hold2_count:
         third_place = hold1_cand
@@ -140,21 +126,13 @@ elif hold1_count > hold3_count:
     fourth_place = hold3_cand
     fourth_count = hold3_count
 
-
-print(second_place, second_count)
-print(third_place, third_count)
-print(fourth_place, fourth_count)
-
-
-
-
 # calculate percentage of votes for each candidate
-winner_percent = (winner_count/total_votes)*100
-second_percent = (second_count/total_votes)*100
-third_percent = (third_count/total_votes)*100
-fourth_percent = (fourth_count/total_votes)*100
+winner_percent = "{:.3f}".format((winner_count/total_votes)*100)
+second_percent = "{:.3f}".format((second_count/total_votes)*100)
+third_percent = "{:.3f}".format((third_count/total_votes)*100)
+fourth_percent = "{:.3f}".format((fourth_count/total_votes)*100)
 
-
+# Output for terminal
 # ================================================================
 print("Election Results")
 print("----------------------------")
