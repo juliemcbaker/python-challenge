@@ -5,14 +5,11 @@
 import os
 import csv
 
-# read in csv & convert to a dictionary
 # need to read in PyPoll/Resources/election_data.csv
 # created smaller file PyPoll/Resources/election_test.csv for testing
 polling_csv = os.path.join(os.getcwd(), "PyPoll", "Resources", "election_data.csv")
-## MAKE SURE THIS IS UPDATED TO BE THE FINAL FILE
-# # creating a filepath for a second file that sets as a dictionary 
-polls_working = os.path.join(os.getcwd(), "PyPoll", "Resources", "election_working.csv")
 
+# read in csv & converted to a dictionary
 with open(polling_csv) as csv_file:            
     csv_reader = csv.reader(csv_file, delimiter = ',')
     dict_reader = csv.DictReader(csv_file, delimiter = ',')
@@ -24,15 +21,18 @@ with open(polling_csv) as csv_file:
     cand_3_counter = 0
     cand_4_counter = 0
     
-    # creates list of candidates & accumulates total votes
+    # creates list of candidates & accumulates votes
     candidates = []
     for row in dict_reader:
         print(row)
-        total_votes = total_votes + 1   
-        if row['Candidate'] not in candidates:
+        total_votes = total_votes + 1           #Overall vote counter
+        
+        # Creates the list of candidates
+        if row['Candidate'] not in candidates:      
            candidates.append(row['Candidate'])
         
-        # accumulates totals for each candidate
+        # Accumulates totals for each candidate. 
+        # I know this would need to be done differently if I didn't know how many candidates there are.
         if row['Candidate'] == candidates[0]:
             cand_1 = candidates[0]
             cand_1_counter = cand_1_counter + 1
@@ -48,7 +48,7 @@ with open(polling_csv) as csv_file:
         else:
             next
 
-# Reordering of candidates by votes received for output
+# Reordering of candidates by votes received for output (would have to rewrite if candidates != 4)
 # This loop determines WINNER
 if cand_1_counter > cand_2_counter:
     hold1_cand = cand_2
@@ -84,7 +84,7 @@ elif cand_2_counter > cand_3_counter:
         winner_count = cand_2_counter
         hold3_cand = cand_4
         hold3_count = cand_4_counter
-        
+      
 # This loop to determines 2nd, 3rd, & 4th places
 if second_count > 0:
     if hold1_count > hold2_count:
@@ -126,24 +126,60 @@ elif hold1_count > hold3_count:
     fourth_place = hold3_cand
     fourth_count = hold3_count
 
-# calculate percentage of votes for each candidate
+# calculate percentage of votes for each candidate & formats to 3 decimals
 winner_percent = "{:.3f}".format((winner_count/total_votes)*100)
 second_percent = "{:.3f}".format((second_count/total_votes)*100)
 third_percent = "{:.3f}".format((third_count/total_votes)*100)
 fourth_percent = "{:.3f}".format((fourth_count/total_votes)*100)
 
+# output lines to simplify output coding
+headline = "Election Results"
+separate = "-------------------------" 
+total_line = f'Total Votes: ({total_votes})'
+win_line = f'{winner}: {winner_percent}% ({winner_count})' 
+second_line = f'{second_place}: {second_percent}% ({second_count})'
+third_line = f'{third_place}: {third_percent}% ({third_count})' 
+fourth_line = f'{fourth_place}: {fourth_percent}% ({fourth_count})' 
+winner_called = f'Winner:  {winner}' 
+
+
 # Output for terminal
 # ================================================================
-print("Election Results")
-print("----------------------------")
-print("Total Votes: " + str(total_votes))
-print("----------------------------")
-print(f'{winner}: {winner_percent}% ({winner_count})') 
-print(f'{second_place}: {second_percent}% ({second_count})') 
-print(f'{third_place}: {third_percent}% ({third_count})') 
-print(f'{fourth_place}: {fourth_percent}% ({fourth_count})') 
-print("----------------------------")
-print("Winner: " + str(winner))
-print("----------------------------")
+print(headline)
+print(separate)
+print(total_line)
+print(separate)
+print(win_line) 
+print(second_line) 
+print(third_line) 
+print(fourth_line) 
+print(separate)
+print(winner_called)
+print(separate)
 
 # ALSO PRINT TO TEXT FILE
+poll_output = os.path.join(os.getcwd(), "PyPoll", "analysis", "election_results.txt")
+
+a = open(poll_output, "w+")
+a.write(headline)
+a.write('\n')
+a.writelines(separate)
+a.write('\n')
+a.writelines(total_line)
+a.write('\n')
+a.writelines(separate)
+a.write('\n')
+a.writelines(win_line) 
+a.write('\n')
+a.writelines(second_line) 
+a.write('\n')
+a.writelines(third_line) 
+a.write('\n')
+a.writelines(fourth_line) 
+a.write('\n')
+a.writelines(separate)
+a.write('\n')
+a.writelines(winner_called)
+a.write('\n')
+a.writelines(separate)
+a.close()
