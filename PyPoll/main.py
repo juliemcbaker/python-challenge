@@ -57,11 +57,102 @@ with open(polling_csv) as csv_file:
 
 # create reordering of candidates by number of votes received for output
 
-# calculate percentage of votes for each candidate
-    # use results from previous 
+# Loop to determine winner
+if cand_1_counter > cand_2_counter:
+    hold1_cand = cand_2
+    hold1_count = cand_2_counter
+    second_count = 0
+    if cand_1_counter > cand_3_counter:
+        hold2_cand = cand_3
+        hold2_count = cand_3_counter
+        if cand_1_counter > cand_4_counter:
+            winner = cand_1
+            winner_count = cand_1_counter
+            hold3_cand = cand_4
+            hold3_count = cand_4_counter
+        else:
+            second_place = cand_1
+            second_count = cand_1_counter
+            winner = cand_4
+            winner_count = cand_4_counter
+    elif cand_3_counter > cand_4_counter:
+        hold2_cand = cand_1
+        hold2_count = cand_1_counter
+        winner = cand_3
+        winner_count = cand_3_counter
+        hold3_cand = cand_4
+        hold3_count = cand_4_counter
+elif cand_2_counter > cand_3_counter:
+    hold1_cand = cand_1
+    hold1_count = cand_1_counter
+    hold2_cand = cand_3
+    hold2_count = cand_3_counter
+    if cand_2_counter > cand_4_counter:
+        winner = cand_2
+        winner_count = cand_2_counter
+        hold3_cand = cand_4
+        hold3_count = cand_4_counter
+        
 
-# popular vote winner
-    # winner = max[counters] ## conceptul
+print(winner, winner_count)
+print(hold1_cand, hold1_count)
+print(hold2_cand, hold2_count)
+print(hold3_cand, hold3_count)
+
+# loop to determine remaining finishing ranks
+if second_count > 0:
+    if hold1_count > hold2_count:
+        third_place = hold1_cand
+        third_count = hold1_count
+        fourth_place = hold2_cand
+        fourth_count = hold2_cand
+    else:
+        third_place = hold2_cand
+        third_count = hold2_count
+        fourth_place = hold1_cand
+        fourth_count = hold1_count
+elif hold1_count > hold2_count:
+    if hold1_count > hold3_count:
+        second_place = hold1_cand
+        second_count = hold1_count
+        if hold2_count > hold3_count:
+            third_place = hold2_cand
+            third_count = hold2_count
+            fourth_place = hold3_cand
+            fourth_count = hold3_count
+        else:
+            third_place = hold3_cand
+            third_count = hold3_count
+            fourth_place = hold2_cand
+            fourth_count = hold2_count
+    elif hold3_count > hold2_count:
+        second_place = hold3_cand
+        second_count = hold3_count
+        third_place = hold2_cand
+        third_count = hold2_count
+        fourth_place = hold1_cand
+        fourth_count = hold1_count
+elif hold1_count > hold3_count:
+    second_place = hold2_cand
+    second_count = hold2_count
+    third_place = hold1_cand
+    third_count = hold1_count
+    fourth_place = hold3_cand
+    fourth_count = hold3_count
+
+
+print(second_place, second_count)
+print(third_place, third_count)
+print(fourth_place, fourth_count)
+
+
+
+
+# calculate percentage of votes for each candidate
+winner_percent = (winner_count/total_votes)*100
+second_percent = (second_count/total_votes)*100
+third_percent = (third_count/total_votes)*100
+fourth_percent = (fourth_count/total_votes)*100
 
 
 # ================================================================
@@ -69,10 +160,12 @@ print("Election Results")
 print("----------------------------")
 print("Total Votes: " + str(total_votes))
 print("----------------------------")
-# print {name1}: percent_name1  (total_name1)
-# etc for each name
-# print("----------------------------")
-# print("Winner: " + str(winner))
-# print("----------------------------")
+print(f'{winner}: {winner_percent}% ({winner_count})') 
+print(f'{second_place}: {second_percent}% ({second_count})') 
+print(f'{third_place}: {third_percent}% ({third_count})') 
+print(f'{fourth_place}: {fourth_percent}% ({fourth_count})') 
+print("----------------------------")
+print("Winner: " + str(winner))
+print("----------------------------")
 
 # ALSO PRINT TO TEXT FILE
